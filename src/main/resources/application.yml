@@ -1,0 +1,56 @@
+server:
+  tomcat:
+    keep-alive-timeout: 15s
+    connection-timeout: 2s
+    threads:
+      min-spare: 5
+      max: 50
+  port: 9002
+  shutdown: graceful
+
+spring:
+  application:
+    name: card-service
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskdb_card
+    username: user
+    password: password
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 2000
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/TaskAgile
+
+  cloud:
+    stream:
+      bindings:
+        sendActivity-out-0:
+          destination: activity-accepted
+        removeActivity-out-0:
+          destination: activity-removed
+
+      rabbit:
+        bindings:
+          sendActivity-out-0:
+            producer:
+              transacted: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+    connection-timeout: 5s
+
+board:
+  service:
+    url: http://localhost:9001
+
+activity:
+  service:
+    url: http://localhost:9005
