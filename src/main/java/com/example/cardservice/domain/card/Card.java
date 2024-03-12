@@ -2,9 +2,10 @@ package com.example.cardservice.domain.card;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
-
+@Table("cards")
 public record Card(
         @Id Long id,
         String title,
