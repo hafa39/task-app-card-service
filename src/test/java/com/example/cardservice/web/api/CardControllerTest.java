@@ -36,7 +36,6 @@ class CardControllerTest {
     @MockBean
     private CardService cardService;
 
-
     // set the bean name like in @PreAuthorize("@boardServiceImpl.isUserMemberOfBoard(#id,#jwt.subject)")
     @MockBean(name = "securityService")
     private SecurityService securityService;

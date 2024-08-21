@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://task-postgres/taskdb_card
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://task-keycloak/realms/TaskAgile
+  rabbitmq:
+    host: task-rabbitmq
+
+board:
+  service:
+    url: http://board-service
+activity:
+  service:
+    url: http://activity-service

@@ -22,13 +22,10 @@ import java.util.stream.Collectors;
 @Transactional
 public class CardServiceImpl implements CardService{
     private static final Logger log = LoggerFactory.getLogger(CardServiceImpl.class);
-
     private final CardRepository cardRepository;
     private final AttachmentRepository attachmentRepository;
-
     private final BoardClient boardClient;
     private final ActivityClient activityClient;
-
     private CardListService cardListService;
     private final StreamBridge streamBridge;
 
@@ -185,7 +182,6 @@ public class CardServiceImpl implements CardService{
         return cardActivities;
     }
 
-    // TODO: Implement remove of a comment
     @Override
     public void removeComment(long cardId, long commentId, String userId) {
         log.info("Removing comment with ID {} for card with ID {} by user {}", commentId, cardId, userId);
