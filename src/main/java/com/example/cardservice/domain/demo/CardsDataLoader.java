@@ -20,9 +20,7 @@ public class CardsDataLoader {
     private CardListRepository cardListRepository;
     private CardRepository cardRepository;
     private AttachmentRepository attachmentRepository;
-
     private static final Logger log = LoggerFactory.getLogger(CardsDataLoader.class);
-
 
     public CardsDataLoader(CardListRepository cardListRepository, CardRepository cardRepository, AttachmentRepository attachmentRepository) {
         this.cardListRepository = cardListRepository;
@@ -37,23 +35,33 @@ public class CardsDataLoader {
         if (cardRepository.count() == 0 && cardListRepository.count() == 0) {
             log.info("Data not found. Initializing sample data...");
 
-            CardList cardList = new CardList(null, "Sample Card List 1", 0, false, Instant.now(), 1L, "bjorn");
-            cardList = cardListRepository.save(cardList);
-            log.info("Created Card List: {}", cardList);
+            // Create "To Do" Card List
+            CardList toDoList = new CardList(null, "To Do", 0, false, Instant.now(), 1L, "bjorn");
+            toDoList = cardListRepository.save(toDoList);
+            log.info("Created Card List: {}", toDoList);
 
-            // Create Cards
-            Card card1 = new Card(null, "Card 1", "Description for Card 1", 0, false, Instant.now(), "image_url", cardList.id());
+            // Create Cards for "To Do" List
+            Card card1 = new Card(null, "Implement Feature X", "Implement the new feature X as per specifications", 0, false, Instant.now(), "image_url", toDoList.id());
             cardRepository.save(card1);
             log.info("Created Card: {}", card1);
 
-            Card card2 = new Card(null, "Card 2", "Description for Card 2", 1, false, Instant.now(), "image_url", cardList.id());
+            Card card2 = new Card(null, "Bug Fixing", "Fix the reported bugs in module Y", 1, false, Instant.now(), "image_url", toDoList.id());
             cardRepository.save(card2);
             log.info("Created Card: {}", card2);
 
-            // Repeat the same for cardList2, card3, and card4
+            // Create "In Progress" Card List
+            CardList inProgressList = new CardList(null, "In Progress", 0, false, Instant.now(), 1L, "bjorn");
+            inProgressList = cardListRepository.save(inProgressList);
+            log.info("Created Card List: {}", inProgressList);
+
+            // Create Card for "In Progress" List
+            Card card3 = new Card(null, "Launch Product Z Campaign", "Plan and execute marketing campaigns for the launch of product Z", 0, false, Instant.now(), "image_url", inProgressList.id());
+            cardRepository.save(card3);
+            log.info("Created Card: {}", card3);
 
             log.info("Sample data initialized successfully.");
         } else {
             log.info("Data already present. Skipping data initialization.");
         }
-    }}
+    }
+}

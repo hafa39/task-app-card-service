@@ -8,8 +8,12 @@ import com.example.cardservice.web.dto.ChangeCardListPositionsPayload;
 import java.util.List;
 
 public interface CardListService {
-
-
+    /**
+     * Retrieves a list of CardList objects associated with the specified board ID from the database.
+     *
+     * @param id the ID of the board containing the lists to retrieve.
+     * @return a list of CardList objects associated with the specified board ID.
+     */
     List<CardList> findByBoardId(Long id);
 
     /**

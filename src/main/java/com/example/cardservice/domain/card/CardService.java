@@ -11,7 +11,6 @@ public interface CardService {
 
     Card addCard(AddCardPayload payload);
 
-
     void changePositions(ChangeCardPositionsPayload payload);
 
     /**
